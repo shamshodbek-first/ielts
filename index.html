@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Tayyorlov Rejasi - 30 Kun</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .day {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+        .day h2 {
+            margin: 0 0 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        li.completed {
+            text-decoration: line-through;
+            color: #999;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        /* Ranglar */
+        .day:nth-child(5n+1) { background-color: #e3f2fd; }
+        .day:nth-child(5n+2) { background-color: #fce4ec; }
+        .day:nth-child(5n+3) { background-color: #f3e5f5; }
+        .day:nth-child(5n+4) { background-color: #e8f5e9; }
+        .day:nth-child(5n+5) { background-color: #fff3e0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IELTS Tayyorlov Rejasi - 30 Kun</h1>
+
+        <div id="tasks">
+            <!-- 1- va 2-kun -->
+            <div class="day">
+                <h2>1-kun</h2>
+                <ul>
+                    <li><input type="checkbox" onchange="toggleTask(this)"> 15 ta yangi so'z yodlash va ular bilan gaplar tuzish.</li>
+                    <li><input type="checkbox" onchange="toggleTask(this)"> Listeningdan 1 ta mashq bajarish (Cambridge IELTS).</li>
+                    <li><input type="checkbox" onchange="toggleTask(this)"> Writing Task 1 (150 so'zli chart tahlili).</li>
+                </ul>
+            </div>
+            <div class="day">
+                <h2>2-kun</h2>
+                <ul>
+                    <li><input type="checkbox" onchange="toggleTask(this)"> Vocabulary: 10 ta sinonim va antonimni yodlash.</li>
+                    <li><input type="checkbox" onchange="toggleTask(this)"> Reading matnidan "True/False/Not Given" mashq bajarish.</li>
+                    <li><input type="checkbox" onchange="toggleTask(this)"> Speaking: "O'zingizni tanishtirish" bo'yicha javob tayyorlash.</li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            const taskContainer = document.getElementById('tasks');
+            const dailyTasks = [
+                ["20 ta yangi collocation yodlash va ularni ishlatish.", "Listeningdan murakkab podkastni tushunishga harakat qilish.", "Essay yozish: 'Technology in education' mavzusi."],
+                ["Readingdan Matching Headings mashqlari (2 ta matn).", "Grammatikada murakkab vaqtlarni (Past Perfect) o'rganish.", "Speaking: IELTS savollariga audio yozib javob berish."],
+                ["Listening: 2 ta audio matn yozib olish va qiyoslash.", "Vocabularydan phrasal verbs o'rganish (15 ta).", "Writing Task 1: 'Line Graph' tahlili."],
+                ["Advanced grammatik qoidalarni (modallar) mustahkamlash.", "Readingdan Multiple Choice savollari bajarish.", "Speaking mashqi: 'Qiziqishlaringiz haqida gapiring'."],
+                ["Vocabularydan idiomlar yodlash (10 ta).", "Writing Task 2: Agree/Disagree esse yozish (250 so'z).", "Listeningdan uzun audio matn konspekt qilish."]
+            ];
+
+            // 3-kundan 30-kungacha
+            for (let i = 3; i <= 30; i++) {
+                const day = document.createElement('div');
+                day.className = 'day';
+                const tasks = dailyTasks[(i - 3) % dailyTasks.length];
+                day.innerHTML = `<h2>${i}-kun</h2><ul>` +
+                    tasks.map(task => `<li><input type="checkbox" onchange="toggleTask(this)"> ${task}</li>`).join("") +
+                    `</ul>`;
+                taskContainer.appendChild(day);
+            }
+        </script>
+
+        <button onclick="resetTasks()">Qayta boshlash</button>
+    </div>
+
+    <script>
+        function toggleTask(checkbox) {
+            const listItem = checkbox.parentElement;
+            if (checkbox.checked) {
+                listItem.classList.add('completed');
+            } else {
+                listItem.classList.remove('completed');
+            }
+        }
+
+        function resetTasks() {
+            const tasks = document.querySelectorAll('#tasks li');
+            tasks.forEach(task => {
+                const checkbox = task.querySelector('input[type="checkbox"]');
+                checkbox.checked = false;
+                task.classList.remove('completed');
+            });
+        }
+    </script>
+</body>
+</html>
