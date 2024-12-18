@@ -106,17 +106,17 @@
                 const listItem = checkbox.parentElement;
                 if (checkbox.checked) {
                     listItem.classList.add('completed');
-                    localStorage.setItem(taskId, 'completed');
+                    sessionStorage.setItem(taskId, 'completed');
                 } else {
                     listItem.classList.remove('completed');
-                    localStorage.removeItem(taskId);
+                    sessionStorage.removeItem(taskId);
                 }
             }
 
             // Saqlangan checkbox holatini tiklash
             document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
                 const taskId = checkbox.id;
-                if (localStorage.getItem(taskId) === 'completed') {
+                if (sessionStorage.getItem(taskId) === 'completed') {
                     checkbox.checked = true;
                     checkbox.parentElement.classList.add('completed');
                 }
