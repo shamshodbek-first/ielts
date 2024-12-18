@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> IELTSGA Tayyorlov Rejasi - 30 Kun</title>
+    <title>IELTSGA Tayyorlov Rejasi - 30 Kun</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,7 +21,7 @@
         }
         h1 {
             text-align: center;
-            color:blue;
+            color: blue;
         }
         .day {
             margin-bottom: 20px;
@@ -50,7 +50,6 @@
             text-decoration: line-through;
             color: #999;
         }
-       
         .day:nth-child(5n+1) { background-color: #e3f2fd; }
         .day:nth-child(5n+2) { background-color: #fce4ec; }
         .day:nth-child(5n+3) { background-color: #f3e5f5; }
@@ -66,17 +65,17 @@
             <div class="day">
                 <h2>1-kun</h2>
                 <ul>
-                    <li><input type="checkbox" onchange="toggleTask(this)"> 15 ta yangi so'z yodlash va ular bilan gaplar tuzish.</li>
-                    <li><input type="checkbox" onchange="toggleTask(this)"> Listeningdan 1 ta mashq bajarish (Cambridge IELTS).</li>
-                    <li><input type="checkbox" onchange="toggleTask(this)"> Writing Task 1 (150 so'zli chart tahlili).</li>
+                    <li><input type="checkbox" id="task1" onchange="toggleTask(this, 1)"> 15 ta yangi so'z yodlash va ular bilan gaplar tuzish.</li>
+                    <li><input type="checkbox" id="task2" onchange="toggleTask(this, 2)"> Listeningdan 1 ta mashq bajarish (Cambridge IELTS).</li>
+                    <li><input type="checkbox" id="task3" onchange="toggleTask(this, 3)"> Writing Task 1 (150 so'zli chart tahlili).</li>
                 </ul>
             </div>
             <div class="day">
                 <h2>2-kun</h2>
                 <ul>
-                    <li><input type="checkbox" onchange="toggleTask(this)"> Vocabulary: 10 ta sinonim va antonimni yodlash.</li>
-                    <li><input type="checkbox" onchange="toggleTask(this)"> Reading matnidan "True/False/Not Given" mashq bajarish.</li>
-                    <li><input type="checkbox" onchange="toggleTask(this)"> Speaking: "O'zingizni tanishtirish" bo'yicha javob tayyorlash.</li>
+                    <li><input type="checkbox" id="task4" onchange="toggleTask(this, 4)"> Vocabulary: 10 ta sinonim va antonimni yodlash.</li>
+                    <li><input type="checkbox" id="task5" onchange="toggleTask(this, 5)"> Reading matnidan "True/False/Not Given" mashq bajarish.</li>
+                    <li><input type="checkbox" id="task6" onchange="toggleTask(this, 6)"> Speaking: "O'zingizni tanishtirish" bo'yicha javob tayyorlash.</li>
                 </ul>
             </div>
         </div>
@@ -91,27 +90,38 @@
                 ["Vocabularydan idiomlar yodlash (10 ta).", "Writing Task 2: Agree/Disagree esse yozish (250 so'z).", "Listeningdan uzun audio matn konspekt qilish."]
             ];
 
+            // 3-kundan 30-kungacha
             for (let i = 3; i <= 30; i++) {
                 const day = document.createElement('div');
                 day.className = 'day';
                 const tasks = dailyTasks[(i - 3) % dailyTasks.length];
                 day.innerHTML = `<h2>${i}-kun</h2><ul>` +
-                    tasks.map(task => `<li><input type="checkbox" onchange="toggleTask(this)"> ${task}</li>`).join("") +
+                    tasks.map((task, index) => `<li><input type="checkbox" id="task${i}-${index+7}" onchange="toggleTask(this, ${i}-${index+7})"> ${task}</li>`).join("") +
                     `</ul>`;
                 taskContainer.appendChild(day);
             }
+
+            // Checkbox holatini saqlash
+            function toggleTask(checkbox, taskId) {
+                const listItem = checkbox.parentElement;
+                if (checkbox.checked) {
+                    listItem.classList.add('completed');
+                    localStorage.setItem(taskId, 'completed');
+                } else {
+                    listItem.classList.remove('completed');
+                    localStorage.removeItem(taskId);
+                }
+            }
+
+            // Saqlangan checkbox holatini tiklash
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                const taskId = checkbox.id;
+                if (localStorage.getItem(taskId) === 'completed') {
+                    checkbox.checked = true;
+                    checkbox.parentElement.classList.add('completed');
+                }
+            });
         </script>
     </div>
-
-    <script>
-        function toggleTask(checkbox) {
-            const listItem = checkbox.parentElement;
-            if (checkbox.checked) {
-                listItem.classList.add('completed');
-            } else {
-                listItem.classList.remove('completed');
-            }
-        }
-    </script>
 </body>
 </html>
