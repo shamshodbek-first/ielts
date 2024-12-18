@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IELTS Tayyorlov Rejasi - 30 Kun</title>
+    <title> IELTSGA Tayyorlov Rejasi - 30 Kun</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,7 +21,7 @@
         }
         h1 {
             text-align: center;
-            color: #333;
+            color:blue;
         }
         .day {
             margin-bottom: 20px;
@@ -50,34 +50,19 @@
             text-decoration: line-through;
             color: #999;
         }
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        /* Ranglar */
+       
         .day:nth-child(5n+1) { background-color: #e3f2fd; }
         .day:nth-child(5n+2) { background-color: #fce4ec; }
         .day:nth-child(5n+3) { background-color: #f3e5f5; }
         .day:nth-child(5n+4) { background-color: #e8f5e9; }
         .day:nth-child(5n+5) { background-color: #fff3e0; }
     </style>
-</head>
+</head>   
 <body>
     <div class="container">
-        <h1>IELTS Tayyorlov Rejasi - 30 Kun</h1>
+        <h1>SHAMSHODBEKNING IELTSGA TAYYORLOV REJASI - 30 KUN</h1>
 
         <div id="tasks">
-            <!-- 1- va 2-kun -->
             <div class="day">
                 <h2>1-kun</h2>
                 <ul>
@@ -106,7 +91,6 @@
                 ["Vocabularydan idiomlar yodlash (10 ta).", "Writing Task 2: Agree/Disagree esse yozish (250 so'z).", "Listeningdan uzun audio matn konspekt qilish."]
             ];
 
-            // 3-kundan 30-kungacha
             for (let i = 3; i <= 30; i++) {
                 const day = document.createElement('div');
                 day.className = 'day';
@@ -117,8 +101,6 @@
                 taskContainer.appendChild(day);
             }
         </script>
-
-        <button onclick="resetTasks()">Qayta boshlash</button>
     </div>
 
     <script>
@@ -129,15 +111,6 @@
             } else {
                 listItem.classList.remove('completed');
             }
-        }
-
-        function resetTasks() {
-            const tasks = document.querySelectorAll('#tasks li');
-            tasks.forEach(task => {
-                const checkbox = task.querySelector('input[type="checkbox"]');
-                checkbox.checked = false;
-                task.classList.remove('completed');
-            });
         }
     </script>
 </body>
